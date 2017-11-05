@@ -1,25 +1,25 @@
-# RedditRSSBot
-I created this as a bot for posting news to my own subreddit but anyone can use it.
+# Reddit RSS Bot
+A bot that checks an rss feed at intervals for unposted articles and posts them to a subreddit
 
-## Python Libraries
-For windows:
-Open up cmd and install the necessary packages
+## Setup
+### Install requirements
 ```
 pip3 install praw, feedparser, configparser
 ```
 
-## Config Editing
-Open up conf.ini in a text editor of your choice.
+### Edit config
+#### RSS Info
+```
+subreddit= the subreddit to post to
+rss_url= url of the rss feed
+interval= the seconds between each rss check
+```
 
-
-Set subreddit to the subreddit you would like to post these rss feed articles.
-
-Set rss_url to the url of the rss feed you're requesting items from.
-
-interval is the interval at which it checks the rss feed for new articles (in seconds).
-
-client_id and client_secret are got from creating a script app at ``https://www.reddit.com/prefs/apps/``
-
-password and username are the password and username to the bot account you create for the bot to use.
-
-You can name your user_agent anything, BotName v1.1 is a suitable and preferable title.
+### Login Info
+```
+client_id= client id from your app https://www.reddit.com/prefs/apps/
+client_secret= client secret from your app https://www.reddit.com/prefs/apps/
+password= bot account password
+username= bot account username
+user_agent= Anything (BotName v1.1)
+```
