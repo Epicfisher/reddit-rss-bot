@@ -10,7 +10,10 @@ pip3 install praw, feedparser, configparser
 
 ## Config Editing
 Open up conf.ini in a text editor of your choice.
+
+
 Set subreddit to the subreddit you would like to post these rss feed articles.
+
 Set rss_url to the url of the rss feed you're requesting items from.
 
 client_id and client_secret are got from creating a script app at ``https://www.reddit.com/prefs/apps/``
