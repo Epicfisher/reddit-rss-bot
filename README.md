@@ -16,7 +16,7 @@ Set subreddit to the subreddit you would like to post these rss feed articles.
 
 Set rss_url to the url of the rss feed you're requesting items from.
 
-interval is the interval at which it checks the rss feed for new articles.
+interval is the interval at which it checks the rss feed for new articles (in seconds).
 
 client_id and client_secret are got from creating a script app at ``https://www.reddit.com/prefs/apps/``
 
