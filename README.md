@@ -15,7 +15,7 @@ rss_url= url of the rss feed
 interval= the seconds between each rss check
 ```
 
-### Login Info
+#### Login Info
 ```
 client_id= client id from your app https://www.reddit.com/prefs/apps/
 client_secret= client secret from your app https://www.reddit.com/prefs/apps/
