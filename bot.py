@@ -38,6 +38,7 @@ while True:
             subreddit.submit(item['title'], url=item['link'])
             postedArticles.append(item['id'])
             newArticles += 1
+            time.sleep(30)
     print("{0} new articles found.".format(newArticles))
 
     with open("postedarticles.txt", "w") as f:
