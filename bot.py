@@ -17,7 +17,7 @@ else:
     subreddit = reddit.subreddit(settings['RSS Info']['subreddit'])
     rss_url = settings['RSS Info']['rss_url']
 
-#Main code
+
 if not os.path.isfile("postedarticles.txt"):
     postedArticles = []
 else:
@@ -27,7 +27,6 @@ else:
        postedArticles = list(filter(None, postedArticles))
 
 starttime=time.time()
-#in seconds
 interval = float(settings['RSS Info']['interval'])
 while True:
     feed = feedparser.parse(rss_url)
