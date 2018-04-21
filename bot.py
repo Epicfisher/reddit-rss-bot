@@ -15,12 +15,12 @@ subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
 rss_url = os.environ['RSSURL']
 
 if debug == 1:
-    print("Posted articles txt in '" + os.path + "postedarticles.txt'")
+    print("Posted articles txt located in '" + os.getcwd() + "postedarticles.txt'")
 #if not os.path.isfile("postedarticles.txt"):
-if not os.path.isfile(os.path + "postedarticles.txt"):
+if not os.path.isfile(os.getcwd() + "postedarticles.txt"):
     postedArticles = []
 else:
-    with open("postedarticles.txt", "r") as f:
+    with open(os.getcwd() + "postedarticles.txt", "r") as f:
        postedArticles = f.read()
        postedArticles = postedArticles.split("\n")
        postedArticles = list(filter(None, postedArticles))
