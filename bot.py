@@ -24,7 +24,7 @@ max_posts = os.environ['MAXPOSTS']
 #       postedArticles = postedArticles.split("\n")
 #       postedArticles = list(filter(None, postedArticles))
 
-postedArticles = subreddit.hot(limit = max_posts)
+postedArticles = reddit.front.new()
 
 print(postedArticles[0])
 
