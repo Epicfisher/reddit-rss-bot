@@ -1,10 +1,16 @@
-# Reddit RSS Bot
+# Modified Reddit RSS Bot
+## (To Work in a System Environment Setting)
 A bot that checks an rss feed at intervals for unposted articles and posts them to a subreddit
 
 ## Setup
 ### Install requirements
+To install requirements, you can either install directly from the requirements.txt file
 ```
-pip3 install praw, feedparser, configparser
+pip3 install -r requirements.txt
+```
+Or, you can choose to install them manually
+```
+pip3 install praw, feedparser
 ```
 
 ### Edit config
