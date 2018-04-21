@@ -27,9 +27,6 @@ max_posts = os.environ['MAXPOSTS']
 #postedArticles = reddit.front.new()
 postedArticles = reddit.redditor('TeignmouthNews').submissions.new()
 
-for post in postedArticles:
-    print(post.url)
-
 starttime=time.time()
 interval = float(os.environ['INTERVAL'])
 while True:
@@ -39,7 +36,7 @@ while True:
     for item in feed['items']:
         linkInPosted = False
         for articleLink in postedArticles:
-            print("Checking '" + item['link'] + "' against '" + articleLink.url + "' now")
+            print("Checking '" + item['link'] + "' and '" + articleLink.url + "'")
             if item['link'] == articleLink.url:
                 linkInPosted = True
         #if item['id'] not in postedArticles:
