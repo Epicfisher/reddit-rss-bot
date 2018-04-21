@@ -42,7 +42,7 @@ while True:
                 subreddit.submit(item['title'], url=item['link'])
             else:
                 print("Debug: Would have posted '" + item['title'] + "' at Link '" + item['link'] + "'")
-            postedArticles.append(item['id'])
+            #postedArticles.append(item['id'])
             newArticles += 1
             time.sleep(30)
     else:
