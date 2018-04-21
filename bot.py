@@ -44,11 +44,13 @@ while True:
             if debug == 0:
                 subreddit.submit(item['title'], url=item['link'])
             else:
-                print("Debug: Would have posted '" + item['title'] + "' at Link '" + item['link'] + "'")
+                #print("Debug: Would have posted '" + item['title'] + "' at Link '" + item['link'] + "'")
+                print("Post")
             newArticles += 1
             time.sleep(30)
         else:
-            print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
+            #print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
+            print("Skip")
 
     print("{0} new articles were posted.".format(newArticles))
 
