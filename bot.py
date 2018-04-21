@@ -13,17 +13,20 @@ debug=os.environ['PYDEBUGVAL']
 
 subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
 rss_url = os.environ['RSSURL']
+max_posts = os.environ['MAXPOSTS']
 
-if debug == 1:
-    print("Posted articles txt located in '" + os.getcwd() + "postedarticles.txt'")
+
 #if not os.path.isfile("postedarticles.txt"):
-if not os.path.isfile(os.getcwd() + "postedarticles.txt"):
-    postedArticles = []
-else:
-    with open(os.getcwd() + "postedarticles.txt", "r") as f:
-       postedArticles = f.read()
-       postedArticles = postedArticles.split("\n")
-       postedArticles = list(filter(None, postedArticles))
+#    postedArticles = []
+#else:
+#    with open("postedarticles.txt", "r") as f:
+#       postedArticles = f.read()
+#       postedArticles = postedArticles.split("\n")
+#       postedArticles = list(filter(None, postedArticles))
+
+postedArticles = subreddit.hot(limit = max_posts)
+
+print(postedArticles[0])
 
 starttime=time.time()
 interval = float(os.environ['INTERVAL'])
@@ -42,11 +45,11 @@ while True:
             newArticles += 1
             time.sleep(30)
     else:
-        print("Skipped One!")
+        print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
 
-    print("{0} new articles found.".format(newArticles))
+    print("{0} new articles were posted.".format(newArticles))
 
-    with open(os.getcwd() + "postedarticles.txt", "w") as f:
+    with open("postedarticles.txt", "w") as f:
         for article_id in postedArticles:
             f.write(article_id + "\n")
 
