@@ -36,7 +36,7 @@ while True:
     for item in feed['items']:
         linkInPosted = False
         for articleLink in postedArticles:
-            print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
+            #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
             if item['link'].replace("http://", "https://") == articleLink.url.replace("http://", "https://"):
                 linkInPosted = True
         if linkInPosted == False:
