@@ -22,7 +22,7 @@ else:
        postedArticles = list(filter(None, postedArticles))
 
 starttime=time.time()
-interval = float(settings['RSS Info']['interval'])
+interval = float(os.environ['INTERVAL'])
 while True:
     feed = feedparser.parse(rss_url)
     print("Checking for new articles!")
