@@ -27,7 +27,7 @@ max_posts = os.environ['MAXPOSTS']
 postedArticles = reddit.front.new()
 
 for post in postedArticles:
-    print(post.id)
+    print(post.url)
 
 starttime=time.time()
 interval = float(os.environ['INTERVAL'])
@@ -38,6 +38,7 @@ while True:
     for item in feed['items']:
         linkInPosted = False
         for articleLink in postedArticles:
+            print("Checking '" + item['link'] + "' against '" + articleLink.url + "' now")
             if item['link'] == articleLink.url:
                 linkInPosted = True
         #if item['id'] not in postedArticles:
