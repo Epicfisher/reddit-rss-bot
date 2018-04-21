@@ -29,6 +29,9 @@ post_interval = float(os.environ['POSTINTERVAL'])
 #postedArticles = reddit.front.new()
 postedArticles = reddit.redditor('TeignmouthNews').submissions.new()
 
+for post in postedArticles:
+    print(post.url.replace("http://", "https://"))
+
 starttime=time.time()
 while True:
     feed = feedparser.parse(rss_url)
