@@ -58,6 +58,6 @@ while True:
             else:
                 print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
 
-    print("{0} new articles were posted. Now waiting {1} seconds.".format(newArticles, interval))
+    print("{0} new articles were posted. Now waiting...".format(newArticles))
 
     time.sleep(interval - ((time.time() - starttime) % interval))
