@@ -47,10 +47,10 @@ while True:
                 #print("Debug: Would have posted '" + item['title'] + "' at Link '" + item['link'] + "'")
                 print("Post")
             newArticles += 1
-            time.sleep(30)
         else:
             #print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
             print("Skip")
+        time.sleep(30)
 
     print("{0} new articles were posted.".format(newArticles))
 
