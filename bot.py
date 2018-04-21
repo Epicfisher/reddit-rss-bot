@@ -41,7 +41,7 @@ while True:
                 linkInPosted = True
         if linkInPosted == False:
             medial_url = item['media_content'][0]['url']
-            if debug == 0:
+            if debug == "0":
                 subreddit.submit(item['title'], url=item['link'])
             else:
                 #print("Debug: Would have posted '" + item['title'] + "' at Link '" + item['link'] + "'")
