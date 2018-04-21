@@ -36,12 +36,12 @@ while True:
     print("Checking for new articles!")
     newArticles = 0
     for item in feed['items']:
-        linkInPosted = false
+        linkInPosted = False
         for articleLink in postedArticles:
             if item['link'] == articleLink.url:
-                linkInPosted = true
+                linkInPosted = True
         #if item['id'] not in postedArticles:
-        if linkInPosted == true
+        if linkInPosted == False
             medial_url = item['media_content'][0]['url']
             if debug == 0:
                 subreddit.submit(item['title'], url=item['link'])
@@ -49,13 +49,13 @@ while True:
                 print("Debug: Would have posted '" + item['title'] + "' at Link '" + item['link'] + "'")
             newArticles += 1
             time.sleep(30)
-    else:
-        print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
+        else:
+            print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
 
     print("{0} new articles were posted.".format(newArticles))
 
-    with open("postedarticles.txt", "w") as f:
-        for article_id in postedArticles:
-            f.write(article_id + "\n")
+#    with open("postedarticles.txt", "w") as f:
+#        for article_id in postedArticles:
+#            f.write(article_id + "\n")
 
     time.sleep(interval - ((time.time() - starttime) % interval))
