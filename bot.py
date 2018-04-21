@@ -37,13 +37,16 @@ while True:
             if debug == 0:
                 subreddit.submit(item['title'], url=item['link'])
             else:
-                print("Will now post '" + item['title'] + "' at Link '" + item['link'] + "'")
+                print("Debug: Would have posted '" + item['title'] + "' at Link '" + item['link'] + "'")
             postedArticles.append(item['id'])
             newArticles += 1
             time.sleep(30)
+    else:
+        print("Skipped One!")
+
     print("{0} new articles found.".format(newArticles))
 
-    with open("postedarticles.txt", "w") as f:
+    with open(os.getcwd() + "postedarticles.txt", "w") as f:
         for article_id in postedArticles:
             f.write(article_id + "\n")
 
