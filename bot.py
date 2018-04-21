@@ -26,7 +26,8 @@ max_posts = os.environ['MAXPOSTS']
 
 postedArticles = reddit.front.new()
 
-print(postedArticles[0])
+for post in postedArticles:
+    print(post.id)
 
 starttime=time.time()
 interval = float(os.environ['INTERVAL'])
