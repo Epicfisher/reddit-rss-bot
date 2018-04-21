@@ -36,10 +36,9 @@ while True:
     for item in feed['items']:
         linkInPosted = False
         for articleLink in postedArticles:
-            print("Checking '" + item['link'] + "' and '" + articleLink.url + "'")
-            if item['link'] == articleLink.url:
+            print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
+            if item['link'].replace("http://", "https://") == articleLink.url.replace("http://", "https://"):
                 linkInPosted = True
-        #if item['id'] not in postedArticles:
         if linkInPosted == False:
             medial_url = item['media_content'][0]['url']
             if debug == 0:
@@ -52,9 +51,5 @@ while True:
             print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
 
     print("{0} new articles were posted.".format(newArticles))
-
-#    with open("postedarticles.txt", "w") as f:
-#        for article_id in postedArticles:
-#            f.write(article_id + "\n")
 
     time.sleep(interval - ((time.time() - starttime) % interval))
