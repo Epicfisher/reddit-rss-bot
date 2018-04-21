@@ -1,5 +1,5 @@
 # Modified Reddit RSS Bot
-## (To Work in a System Environment Setting)
+### (To Work with System Environment Variables)
 A bot that checks an rss feed at intervals for unposted articles and posts them to a subreddit
 
 ## Setup
