@@ -1,21 +1,16 @@
-import praw, feedparser, os, time, configparser
+import praw, feedparser, os, time
 
 #Initialisation
-p = configparser.ConfigParser()
-if not os.path.isfile("conf.ini"):
-    print("No config file found!")
-else:
-    p.read("conf.ini")
-    settings = p.__dict__['_sections'].copy()
-    reddit = praw.Reddit(
-        client_id=settings['Login Info']['client_id'],
-        client_secret=settings['Login Info']['client_secret'],
-        password=settings['Login Info']['password'],
-        user_agent=settings['Login Info']['user_agent'],
-        username=settings['Login Info']['username']
-    )
-    subreddit = reddit.subreddit(settings['RSS Info']['subreddit'])
-    rss_url = settings['RSS Info']['rss_url']
+reddit = praw.Reddit(
+    client_id=os.environ['ID'],
+    client_secret=os.environ['SECRET'],
+    password=os.environ['PASSWORD'],
+    user_agent=os.environ['USERAGENT'],
+    username=os.environ['USERNAME']
+)
+
+subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
+rss_url = os.environ['RSSURL']
 
 
 if not os.path.isfile("postedarticles.txt"):
