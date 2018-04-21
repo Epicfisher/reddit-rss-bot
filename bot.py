@@ -41,7 +41,7 @@ while True:
             if item['link'] == articleLink.url:
                 linkInPosted = True
         #if item['id'] not in postedArticles:
-        if linkInPosted == False
+        if linkInPosted == False:
             medial_url = item['media_content'][0]['url']
             if debug == 0:
                 subreddit.submit(item['title'], url=item['link'])
