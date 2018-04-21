@@ -25,7 +25,9 @@ max_posts = os.environ['MAXPOSTS']
 #       postedArticles = list(filter(None, postedArticles))
 
 #postedArticles = reddit.front.new()
-postedArticles = reddit.user.me().new():
+postedArticles = reddit.redditor('TeignmouthNews').submissions.new()
+
+print(len(postedArticles))
 
 for post in postedArticles:
     print(post.url)
