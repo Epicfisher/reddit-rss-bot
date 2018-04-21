@@ -9,11 +9,15 @@ reddit = praw.Reddit(
     username=os.environ['USERNAME']
 )
 
+debug=os.environ['PYDEBUGVAL']
+
 subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
 rss_url = os.environ['RSSURL']
 
-
-if not os.path.isfile("postedarticles.txt"):
+if debug == 1:
+    print("Posted articles txt in '" + os.path + "postedarticles.txt'")
+#if not os.path.isfile("postedarticles.txt"):
+if not os.path.isfile(os.path + "postedarticles.txt"):
     postedArticles = []
 else:
     with open("postedarticles.txt", "r") as f:
@@ -30,7 +34,10 @@ while True:
     for item in feed['items']:
         if item['id'] not in postedArticles:
             medial_url = item['media_content'][0]['url']
-            subreddit.submit(item['title'], url=item['link'])
+            if debug == 0:
+                subreddit.submit(item['title'], url=item['link'])
+            else:
+                print("Will now post '" + item['title'] + "' at Link '" + item['link'] + "'")
             postedArticles.append(item['id'])
             newArticles += 1
             time.sleep(30)
