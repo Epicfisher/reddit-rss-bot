@@ -15,6 +15,8 @@ subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
 rss_url = os.environ['RSSURL']
 max_posts = os.environ['MAXPOSTS']
 
+interval = float(os.environ['INTERVAL'])
+post_interval = float(os.environ['POSTINTERVAL'])
 
 #if not os.path.isfile("postedarticles.txt"):
 #    postedArticles = []
@@ -28,7 +30,6 @@ max_posts = os.environ['MAXPOSTS']
 postedArticles = reddit.redditor('TeignmouthNews').submissions.new()
 
 starttime=time.time()
-interval = float(os.environ['INTERVAL'])
 while True:
     feed = feedparser.parse(rss_url)
     print("Checking for new articles!")
@@ -43,14 +44,16 @@ while True:
             medial_url = item['media_content'][0]['url']
             if debug == "0":
                 subreddit.submit(item['title'], url=item['link'])
+                print("Posted '" + item['title'] + "' at Link '" + item['link'] + "'")
             else:
-                #print("Debug: Would have posted '" + item['title'] + "' at Link '" + item['link'] + "'")
-                print("Post")
+                print("(DEBUG) Would have Posted '" + item['title'] + "' at Link '" + item['link'] + "'")
             newArticles += 1
+            time.sleep(post_interval)
         else:
-            #print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
-            print("Skip")
-        time.sleep(30)
+            if debug == "1":
+                print("(DEBUG) Would have Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
+            else:
+                print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
 
     print("{0} new articles were posted.".format(newArticles))
 
