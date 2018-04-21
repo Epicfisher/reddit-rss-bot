@@ -25,7 +25,7 @@ max_posts = os.environ['MAXPOSTS']
 #       postedArticles = list(filter(None, postedArticles))
 
 #postedArticles = reddit.front.new()
-postedArticles = self.redditor.get_overview():
+postedArticles = reddit.user.me().new():
 
 for post in postedArticles:
     print(post.url)
