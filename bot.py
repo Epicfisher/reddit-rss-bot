@@ -29,8 +29,8 @@ post_interval = float(os.environ['POSTINTERVAL'])
 #postedArticles = reddit.front.new()
 postedArticles = reddit.redditor('TeignmouthNews').submissions.new()
 
-for post in postedArticles:
-    print(post.url.replace("http://", "https://"))
+#for post in postedArticles:
+#    print(post.url.replace("http://", "https://"))
 
 starttime=time.time()
 while True:
@@ -43,6 +43,7 @@ while True:
             #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
             if item['link'].replace("http://", "https://") == articleLink.url.replace("http://", "https://"):
                 linkInPosted = True
+                print(item['link'].replace("http://", "https://") + " _ IS EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
         if linkInPosted == True:
             medial_url = item['media_content'][0]['url']
             if debug == "0":
