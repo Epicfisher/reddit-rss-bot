@@ -41,9 +41,9 @@ while True:
     newArticles = 0
     for item in feed['items']:
         linkInPosted = 0
-        print("Reset linkInPosted")
         for articleLink in postedArticles:
             #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
+            print("Checking '" + articleLink.url + "'")
             if item['link'].replace("http://", "https://") == articleLink.url.replace("http://", "https://"):
                 linkInPosted = 1
                 print(item['link'].replace("http://", "https://") + " _ IS EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
