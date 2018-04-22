@@ -46,6 +46,9 @@ while True:
             i = i + 1
         print(str(i) + " Elements in postedArticles")
         for articleLink in postedArticles:
+            i = i + 1
+        print(str(i) + " Elements in postedArticles, Second Try")
+        for articleLink in postedArticles:
             #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
             #print("Checking '" + articleLink.url + "'")
             if item['link'].replace("http://", "https://") == articleLink.url.replace("http://", "https://"):
