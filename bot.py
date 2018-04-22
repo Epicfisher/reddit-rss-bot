@@ -1,6 +1,8 @@
 import praw, feedparser, os, time
 
 #Initialisation
+
+#Login Info
 reddit = praw.Reddit(
     client_id=os.environ['ID'],
     client_secret=os.environ['SECRET'],
@@ -9,23 +11,17 @@ reddit = praw.Reddit(
     username=os.environ['USERNAME']
 )
 
+#General Settings
 debug=os.environ['PYDEBUGVAL']
 
-subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
+#RSS Info
 rss_url = os.environ['RSSURL']
 
+#Post Settings
+subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
 interval = float(os.environ['INTERVAL'])
 post_interval = float(os.environ['POSTINTERVAL'])
 
-#if not os.path.isfile("postedarticles.txt"):
-#    postedArticles = []
-#else:
-#    with open("postedarticles.txt", "r") as f:
-#       postedArticles = f.read()
-#       postedArticles = postedArticles.split("\n")
-#       postedArticles = list(filter(None, postedArticles))
-
-#newPosts = reddit.front.new()
 postedArticlesGenerated = reddit.redditor('TeignmouthNews').submissions.new()
 postedArticles = list(postedArticlesGenerated)
 
@@ -46,7 +42,6 @@ while True:
             #else:
                 #print(item['link'].replace("http://", "https://") + " _ IS NOT EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
         if linkInPosted == False:
-            #medial_url = item['media_content'][0]['url']
             if debug == "0":
                 subreddit.submit(item['title'], url=item['link'].replace("http://", "https://"))
                 print("Posted '" + item['title'] + "' at Link '" + item['link'].replace("http://", "https://") + "'")
