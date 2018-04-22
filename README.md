@@ -25,7 +25,7 @@ pip3 install praw, feedparser
 
 #### General Settings
 ```
-'DEBUG' = Can be 1 or 0. If 1, the bot doesn't post anything (Default is 0)
+'PYDEBUGVAL' = Can be 1 or 0. If 1, the bot doesn't post anything (Default is 0)
 ```
 
 #### RSS Info
