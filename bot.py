@@ -51,10 +51,10 @@ while True:
             if debug == "0":
                 subreddit.submit(item['title'], url=item['link'].replace("http://", "https://"))
                 print("Posted '" + item['title'] + "' at Link '" + item['link'].replace("http://", "https://") + "'")
+                time.sleep(post_interval)
             else:
                 print("(DEBUG) Would have Posted '" + item['title'] + "' at Link '" + item['link'].replace("http://", "https://") + "'")
             newArticles += 1
-            time.sleep(post_interval)
         else:
             if debug == "1":
                 print("(DEBUG) Would have Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
