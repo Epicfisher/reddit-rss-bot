@@ -44,7 +44,9 @@ while True:
             if item['link'].replace("http://", "https://") == articleLink.url.replace("http://", "https://"):
                 linkInPosted = True
                 print(item['link'].replace("http://", "https://") + " _ IS EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
-        if linkInPosted == True:
+            else:
+                print(item['link'].replace("http://", "https://") + " _ IS NOT EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
+        if linkInPosted == False:
             medial_url = item['media_content'][0]['url']
             if debug == "0":
                 subreddit.submit(item['title'], url=item['link'])
