@@ -36,6 +36,6 @@ pip3 install praw, feedparser
 #### Post Settings
 ```
 'SUBREDDIT' = The Subreddit's name to post to
-'INTERVAL' = Amount of seconds to wait between each RSS check. (Default is 3600)
-'POSTINTERVAL' = Amount of seconds to wait after each post has been made. (Default is 30)
+'INTERVAL' = Amount of seconds to wait between each RSS check (Default is 3600, which equates to 1 hour)
+'POSTINTERVAL' = Amount of seconds to wait after each post has been made (Default is 30)
 ```
