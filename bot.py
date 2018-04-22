@@ -27,7 +27,8 @@ post_interval = float(os.environ['POSTINTERVAL'])
 #       postedArticles = list(filter(None, postedArticles))
 
 #postedArticles = reddit.front.new()
-postedArticles = reddit.redditor('TeignmouthNews').submissions.new()
+postedArticlesGenerated = reddit.redditor('TeignmouthNews').submissions.new()
+postedArticles = list(postedArticlesGenerated)
 
 #for post in postedArticles:
 #    print(post.url.replace("http://", "https://"))
@@ -45,9 +46,6 @@ while True:
         for articleLink in postedArticles:
             i = i + 1
         print(str(i) + " Elements in postedArticles")
-        for articleLink in postedArticles:
-            i = i + 1
-        print(str(i) + " Elements in postedArticles, Second Try")
         for articleLink in postedArticles:
             #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
             #print("Checking '" + articleLink.url + "'")
