@@ -20,12 +20,12 @@ pip3 install praw, feedparser
 'SECRET' = Client Secret from your app (https://www.reddit.com/prefs/apps/)
 'PASSWORD' = Bot Account Password
 'USERNAME' = Bot Account Username
-'USERAGENT' = User Agent that will be used to access the Reddit API. Can be anything (For example, name it after your bot, like "BotName v1.1")
+'USERAGENT' = Can be anything (For example, name it after your bot, like "BotName v1.1")
 ```
 
 #### General Settings
 ```
-'DEBUG' = Can be 1 or 0. Defines whether or not the bot starts in Debug Mode. When in Debug Mode, the bot doesn't actually post anything (Default is 0)
+'DEBUG' = Can be 1 or 0. If 1, the bot doesn't post anything (Default is 0)
 ```
 
 #### RSS Info
@@ -36,6 +36,6 @@ pip3 install praw, feedparser
 #### Post Settings
 ```
 'SUBREDDIT' = The Subreddit's name to post to
-'INTERVAL' = Amount of seconds to wait between each RSS check. (Default is 3600, which equals one hour)
-'POSTINTERVAL' = Amount of seconds to wait after each post has been made. (Default is 30 seconds)
+'INTERVAL' = Amount of seconds to wait between each RSS check. (Default is 3600)
+'POSTINTERVAL' = Amount of seconds to wait after each post has been made. (Default is 30)
 ```
