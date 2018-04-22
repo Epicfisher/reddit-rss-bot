@@ -32,22 +32,25 @@ postedArticles = reddit.redditor('TeignmouthNews').submissions.new()
 #for post in postedArticles:
 #    print(post.url.replace("http://", "https://"))
 
+linkInPosted = 0
+
 starttime=time.time()
 while True:
     feed = feedparser.parse(rss_url)
     print("Checking for new articles!")
     newArticles = 0
     for item in feed['items']:
-        linkInPosted = False
+        linkInPosted = 0
+        print("Reset linkInPosted")
         for articleLink in postedArticles:
             #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
             if item['link'].replace("http://", "https://") == articleLink.url.replace("http://", "https://"):
-                linkInPosted = True
+                linkInPosted = 1
                 print(item['link'].replace("http://", "https://") + " _ IS EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
             else:
                 print(item['link'].replace("http://", "https://") + " _ IS NOT EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
-        if linkInPosted == False:
-            medial_url = item['media_content'][0]['url']
+        if linkInPosted == 0:
+            #medial_url = item['media_content'][0]['url']
             if debug == "0":
                 subreddit.submit(item['title'], url=item['link'])
                 print("Posted '" + item['title'] + "' at Link '" + item['link'] + "'")
