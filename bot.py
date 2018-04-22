@@ -22,7 +22,6 @@ subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
 interval = float(os.environ['INTERVAL'])
 post_interval = float(os.environ['POSTINTERVAL'])
 
-#postedArticlesGenerated = reddit.redditor(os.environ['USERNAME']).submissions.new()
 postedArticles = list(reddit.redditor(os.environ['USERNAME']).submissions.new())
 
 linkInPosted = False
