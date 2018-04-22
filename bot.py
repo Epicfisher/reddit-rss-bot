@@ -41,7 +41,10 @@ while True:
     newArticles = 0
     for item in feed['items']:
         linkInPosted = 0
-        print(len(postedArticles))
+        i = 0
+        for articleLink in postedArticles:
+            i++
+        print(str(i) + " Elements in postedArticles")
         for articleLink in postedArticles:
             #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
             #print("Checking '" + articleLink.url + "'")
