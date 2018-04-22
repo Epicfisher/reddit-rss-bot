@@ -43,7 +43,7 @@ while True:
         linkInPosted = 0
         i = 0
         for articleLink in postedArticles:
-            i++
+            i = i + 1
         print(str(i) + " Elements in postedArticles")
         for articleLink in postedArticles:
             #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
