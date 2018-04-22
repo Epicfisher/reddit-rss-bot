@@ -13,7 +13,6 @@ debug=os.environ['PYDEBUGVAL']
 
 subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
 rss_url = os.environ['RSSURL']
-max_posts = os.environ['MAXPOSTS']
 
 interval = float(os.environ['INTERVAL'])
 post_interval = float(os.environ['POSTINTERVAL'])
