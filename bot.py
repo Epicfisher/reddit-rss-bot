@@ -22,13 +22,10 @@ subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
 interval = float(os.environ['INTERVAL'])
 post_interval = float(os.environ['POSTINTERVAL'])
 
-postedArticles = list(reddit.redditor(os.environ['USERNAME']).submissions.new())
-
-linkInPosted = False
-
 starttime=time.time()
 while True:
     feed = feedparser.parse(rss_url)
+    postedArticles = list(reddit.redditor(os.environ['USERNAME']).submissions.new())
     print("Now checking for new articles!")
     newArticles = 0
     for item in feed['items']:
@@ -46,11 +43,11 @@ while True:
                 print("Posted '" + item['title'] + "' at Link '" + item['link'].replace("http://", "https://") + "'")
                 time.sleep(post_interval)
             else:
-                print("(DEBUG) Would have Posted '" + item['title'] + "' at Link '" + item['link'].replace("http://", "https://") + "'")
+                print("(DEBUG) Posted '" + item['title'] + "' at Link '" + item['link'].replace("http://", "https://") + "'")
             newArticles += 1
         else:
             if debug == "1":
-                print("(DEBUG) Would have Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
+                print("(DEBUG) Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
             else:
                 print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
 
