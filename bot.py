@@ -22,7 +22,7 @@ def LoadConfigVariable(system_variable, header, key, mandatory, default_value=-1
                 print("(INIT) FATAL ERROR: Mandatory Variable " + system_variable + " Missing from Both Config File and System Environment Variable! Exiting...")
                 raise SystemExit(0)
             else:
-                print("(INIT) INFORMATION: Optional Variable " + system_variable + " Missing from Both Config File and System Environment Variable! Using Default Value of " + default_value + "...")
+                print("(INIT) INFORMATION: Optional Variable " + system_variable + " Missing from Both Config File and System Environment Variable! Using Default Value of " + str(default_value) + "...")
                 out = default_value
     return out
 
