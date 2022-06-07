@@ -1,26 +1,58 @@
-import praw, feedparser, os, time
+from asyncio.windows_events import NULL
+import praw, feedparser, configparser, os, time
 
-#Initialisation
+# Initialisation
+p = configparser.ConfigParser()
+pExists = True
+if not os.path.isfile("conf.ini"):
+    print("(INIT) No config file found! This is not a fatal error assuming you have used System Environment Variables to assign your Mandatory config variables instead!")
+    pExists = False
+else:
+    p.read("conf.ini")
+    settings = p.__dict__['_sections'].copy()
 
-#Login Info
+def LoadConfigVariable(system_variable, header, key, mandatory, default_value):
+    try:
+        out=os.environ[system_variable]
+        print("(INIT) Loaded " + system_variable + " from System Environment Variable")
+    except:
+        if pExists:
+            out = settings[header][key]
+        else:
+            if mandatory:
+                print("(INIT) FATAL ERROR: Mandatory Variable " + system_variable + " Missing from Both Config File and System Environment Variable! Exiting...")
+                raise SystemExit(0)
+            else:
+                print("(INIT) INFORMATION: Optional Variable " + system_variable + " Missing from Both Config File and System Environment Variable! Using Default Value of " + default_value + "...")
+                out = default_value
+    return out
+
+## Login Info
+_client_id = LoadConfigVariable('REDDITRSSID', 'Login Info', 'id', True, NULL)
+_client_secret = LoadConfigVariable('REDDITRSSSECRET', 'Login Info', 'secret', True, NULL)
+_password = LoadConfigVariable('REDDITRSSPASSWORD', 'Login Info', 'password', True, NULL)
+_user_agent = LoadConfigVariable('REDDITRSSUSERAGENT', 'Login Info', 'user_agent', True, NULL)
+_username = LoadConfigVariable('REDDITRSSUSERNAME', 'Login Info', 'username', True, NULL)
+
 reddit = praw.Reddit(
-    client_id=os.environ['ID'],
-    client_secret=os.environ['SECRET'],
-    password=os.environ['PASSWORD'],
-    user_agent=os.environ['USERAGENT'],
-    username=os.environ['USERNAME']
+    client_id=_client_id,
+    client_secret=_client_secret,
+    password=_password,
+    user_agent=_user_agent,
+    username=_username
 )
 
-#General Settings
-debug=os.environ['PYDEBUGVAL']
+## General Settings
+debug = int(LoadConfigVariable('REDDITRSSPYDEBUGVAL', 'General Settings', 'py_debug_val', False, 0))
 
-#RSS Info
-rss_url = os.environ['RSSURL']
+## RSS Info
+rss_url = LoadConfigVariable('REDDITRSSURL', 'RSS Info', 'rss_url', True, NULL)
 
-#Post Settings
-subreddit = reddit.subreddit(os.environ['SUBREDDIT'])
-interval = float(os.environ['INTERVAL'])
-post_interval = float(os.environ['POSTINTERVAL'])
+## Post Settings
+subreddit = LoadConfigVariable('REDDITRSSSUBREDDIT', 'Post Settings', 'subreddit', True, NULL)
+interval = LoadConfigVariable('REDDITRSSINTERVAL', 'Post Settings', 'interval', False, 3600)
+post_interval = LoadConfigVariable('REDDITRSSPOSTINTERVAL', 'Post Settings', 'post_interval', False, 30)
+# Initialisation End
 
 starttime=time.time()
 while True:
@@ -38,7 +70,7 @@ while True:
             #else:
                 #print(item['link'].replace("http://", "https://") + " _ IS NOT EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
         if linkInPosted == False:
-            if debug == "0":
+            if debug == 0:
                 subreddit.submit(item['title'], url=item['link'].replace("http://", "https://"))
                 print("Posted '" + item['title'] + "' at Link '" + item['link'].replace("http://", "https://") + "'")
                 time.sleep(post_interval)
@@ -46,7 +78,7 @@ while True:
                 print("(DEBUG) Posted '" + item['title'] + "' at Link '" + item['link'].replace("http://", "https://") + "'")
             newArticles += 1
         else:
-            if debug == "1":
+            if debug == 1:
                 print("(DEBUG) Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
             else:
                 print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
