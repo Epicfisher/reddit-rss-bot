@@ -43,7 +43,7 @@ reddit = praw.Reddit(
 
 ## General Settings
 debug = int(LoadConfigVariable('REDDITRSSPYDEBUGVAL', 'General Settings', 'py_debug_val', False, 0))
-save_posted = int(LoadConfigVariable('REDDITRSSSAVEPOSTED', 'General Settings', 'save_posted'), False, 0)
+save_posted = int(LoadConfigVariable('REDDITRSSSAVEPOSTED', 'General Settings', 'save_posted', False, 0))
 
 ## RSS Info
 rss_url = LoadConfigVariable('REDDITRSSURL', 'RSS Info', 'rss_url', True)
