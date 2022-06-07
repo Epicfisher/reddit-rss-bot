@@ -1,15 +1,18 @@
-# Modified Reddit RSS Bot
+# Reddit RSS Bot
 
-A Bot that checks an RSS Feed at intervals for unposted articles and posts them to a Subreddit.
+A Bot that checks an RSS Feed at intervals for unposted articles, and posts them to a Subreddit.
+
+> Powering [r/Teignmouth](https://www.reddit.com/r/Teignmouth/) news since 2018!
 
 ## Features
+* Posts articles from an RSS Feed to a Subreddit, without duplicates
 * Portable: Queries Reddit for already posted Links without having to externally keep track
-* Configurable settings allow for fine-tuning of delays between every post and RSS check
-* Allows for loading of config variables via Config File or System Environment Variables
+* Configurable settings allow for fine-tuning of delays between each post and RSS check
+* Allows for setting of config variables via Config File or System Environment Variables
 
 ## Setup
 ### Install requirements
-To install requirements, you can either install directly from the requirements.txt file
+To install requirements, you can either install directly from the `requirements.txt` file
 ```
 pip3 install -r requirements.txt
 ```
@@ -102,3 +105,9 @@ The following Config Variables are not nececcary for your Bot to work, and have 
 
 ## Usage
 The Bot can be started by running the `bot.py` file in your preferred version of Python 3
+
+## Contributors
+
+This project contains work from the following contributors:
+
+[LargeBee](https://github.com/LargeBee) - For their [original RedditRSSBot repo](https://github.com/LargeBee/RedditRSSBot)
