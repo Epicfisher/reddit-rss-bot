@@ -98,8 +98,9 @@ while True:
 
     print("{0} new articles were posted. Now waiting {1} seconds...".format(newArticles, interval))
 
-    with open('postedarticles.txt', 'w') as f:
-        for article_id in postedArticles:
-            f.write(article_id + "\n")
+    if save_posted:
+        with open('postedarticles.txt', 'w') as f:
+            for article_id in postedArticles:
+                f.write(article_id + "\n")
 
     time.sleep(interval - ((time.time() - starttime) % interval))
