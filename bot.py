@@ -43,6 +43,7 @@ reddit = praw.Reddit(
 
 ## General Settings
 debug = int(LoadConfigVariable('REDDITRSSPYDEBUGVAL', 'General Settings', 'py_debug_val', False, 0))
+save_posted = int(LoadConfigVariable('REDDITRSSSAVEPOSTED', 'General Settings', 'save_posted'), False, 0)
 
 ## RSS Info
 rss_url = LoadConfigVariable('REDDITRSSURL', 'RSS Info', 'rss_url', True)
@@ -53,21 +54,32 @@ interval = float(LoadConfigVariable('REDDITRSSINTERVAL', 'Post Settings', 'inter
 post_interval = float(LoadConfigVariable('REDDITRSSPOSTINTERVAL', 'Post Settings', 'post_interval', False, 30))
 # Initialisation End
 
+if save_posted:
+    if not os.path.isfile("postedarticles.txt"):
+        postedArticles = []
+    else:
+        with open("postedarticles.txt", "r") as f:
+            postedArticles = f.read()
+            postedArticles = postedArticles.split("\n")
+            postedArticles = list(filter(None, postedArticles))
+
 starttime=time.time()
 while True:
     feed = feedparser.parse(rss_url)
-    postedArticles = list(reddit.redditor(_username).submissions.new())
+    if not save_posted:
+        postedArticles = list(reddit.redditor(_username).submissions.new())
     print("Now checking for new articles!")
     newArticles = 0
     for item in feed['items']:
         linkInPosted = False
-        for articleLink in postedArticles:
-            #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
-            if item['link'].replace("http://", "https://") == articleLink.url.replace("http://", "https://"):
-                linkInPosted = True
-                #print(item['link'].replace("http://", "https://") + " _ IS EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
-            #else:
-                #print(item['link'].replace("http://", "https://") + " _ IS NOT EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
+        if not (save_posted and item['id'] not in postedArticles):
+            for articleLink in postedArticles:
+                #print("Checking '" + item['link'].replace("http://", "https://") + "' and '" + articleLink.url.replace("http://", "https://") + "'")
+                if item['link'].replace("http://", "https://") == articleLink.url.replace("http://", "https://"):
+                    linkInPosted = True
+                    #print(item['link'].replace("http://", "https://") + " _ IS EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
+                #else:
+                    #print(item['link'].replace("http://", "https://") + " _ IS NOT EQUAL TO _ " + articleLink.url.replace("http://", "https://"))
         if linkInPosted == False:
             if debug == 0:
                 subreddit.submit(item['title'], url=item['link'].replace("http://", "https://"))
@@ -75,6 +87,8 @@ while True:
                 time.sleep(post_interval)
             else:
                 print("(DEBUG) Posted '" + item['title'] + "' at Link '" + item['link'].replace("http://", "https://") + "'")
+            if save_posted:
+                postedArticles.append(item['id'])
             newArticles += 1
         else:
             if debug == 1:
@@ -83,5 +97,9 @@ while True:
                 print("Skipped '" + item['title'] + "' at Link '" + item['link'] + "'")
 
     print("{0} new articles were posted. Now waiting {1} seconds...".format(newArticles, interval))
+
+    with open('postedarticles.txt', 'w') as f:
+        for article_id in postedArticles:
+            f.write(article_id + "\n")
 
     time.sleep(interval - ((time.time() - starttime) % interval))
