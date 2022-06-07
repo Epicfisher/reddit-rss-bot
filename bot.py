@@ -56,7 +56,7 @@ post_interval = float(LoadConfigVariable('REDDITRSSPOSTINTERVAL', 'Post Settings
 starttime=time.time()
 while True:
     feed = feedparser.parse(rss_url)
-    postedArticles = list(reddit.redditor(os.environ['USERNAME']).submissions.new())
+    postedArticles = list(reddit.redditor(_username).submissions.new())
     print("Now checking for new articles!")
     newArticles = 0
     for item in feed['items']:
