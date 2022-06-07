@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import praw, feedparser, configparser, os, time
 
 # Initialisation
@@ -11,7 +10,7 @@ else:
     p.read("conf.ini")
     settings = p.__dict__['_sections'].copy()
 
-def LoadConfigVariable(system_variable, header, key, mandatory, default_value):
+def LoadConfigVariable(system_variable, header, key, mandatory, default_value=-1):
     try:
         out=os.environ[system_variable]
         print("(INIT) Loaded " + system_variable + " from System Environment Variable")
@@ -28,11 +27,11 @@ def LoadConfigVariable(system_variable, header, key, mandatory, default_value):
     return out
 
 ## Login Info
-_client_id = LoadConfigVariable('REDDITRSSID', 'Login Info', 'id', True, NULL)
-_client_secret = LoadConfigVariable('REDDITRSSSECRET', 'Login Info', 'secret', True, NULL)
-_password = LoadConfigVariable('REDDITRSSPASSWORD', 'Login Info', 'password', True, NULL)
-_user_agent = LoadConfigVariable('REDDITRSSUSERAGENT', 'Login Info', 'user_agent', True, NULL)
-_username = LoadConfigVariable('REDDITRSSUSERNAME', 'Login Info', 'username', True, NULL)
+_client_id = LoadConfigVariable('REDDITRSSID', 'Login Info', 'id', True)
+_client_secret = LoadConfigVariable('REDDITRSSSECRET', 'Login Info', 'secret', True)
+_password = LoadConfigVariable('REDDITRSSPASSWORD', 'Login Info', 'password', True)
+_user_agent = LoadConfigVariable('REDDITRSSUSERAGENT', 'Login Info', 'user_agent', True)
+_username = LoadConfigVariable('REDDITRSSUSERNAME', 'Login Info', 'username', True)
 
 reddit = praw.Reddit(
     client_id=_client_id,
@@ -46,12 +45,12 @@ reddit = praw.Reddit(
 debug = int(LoadConfigVariable('REDDITRSSPYDEBUGVAL', 'General Settings', 'py_debug_val', False, 0))
 
 ## RSS Info
-rss_url = LoadConfigVariable('REDDITRSSURL', 'RSS Info', 'rss_url', True, NULL)
+rss_url = LoadConfigVariable('REDDITRSSURL', 'RSS Info', 'rss_url', True)
 
 ## Post Settings
-subreddit = LoadConfigVariable('REDDITRSSSUBREDDIT', 'Post Settings', 'subreddit', True, NULL)
-interval = LoadConfigVariable('REDDITRSSINTERVAL', 'Post Settings', 'interval', False, 3600)
-post_interval = LoadConfigVariable('REDDITRSSPOSTINTERVAL', 'Post Settings', 'post_interval', False, 30)
+subreddit = LoadConfigVariable('REDDITRSSSUBREDDIT', 'Post Settings', 'subreddit', True)
+interval = float(LoadConfigVariable('REDDITRSSINTERVAL', 'Post Settings', 'interval', False, 3600))
+post_interval = float(LoadConfigVariable('REDDITRSSPOSTINTERVAL', 'Post Settings', 'post_interval', False, 30))
 # Initialisation End
 
 starttime=time.time()
