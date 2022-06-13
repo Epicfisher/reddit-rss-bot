@@ -49,7 +49,7 @@ save_posted = int(LoadConfigVariable('REDDITRSSSAVEPOSTED', 'General Settings', 
 rss_url = LoadConfigVariable('REDDITRSSURL', 'RSS Info', 'rss_url', True)
 
 ## Post Settings
-subreddit = LoadConfigVariable('REDDITRSSSUBREDDIT', 'Post Settings', 'subreddit', True)
+subreddit = reddit.subreddit(LoadConfigVariable('REDDITRSSSUBREDDIT', 'Post Settings', 'subreddit', True))
 interval = float(LoadConfigVariable('REDDITRSSINTERVAL', 'Post Settings', 'interval', False, 3600))
 post_interval = float(LoadConfigVariable('REDDITRSSPOSTINTERVAL', 'Post Settings', 'post_interval', False, 30))
 # Initialisation End
